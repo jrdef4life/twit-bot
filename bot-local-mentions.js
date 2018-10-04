@@ -1,11 +1,11 @@
 console.log('The bot has started... ');
 let randomString = require('./randomStrings');
-var Twit = require('twit');
-var config = require('./config');
-var T = new Twit(config);
+let Twit = require('twit');
+let config = require('./config');
+let T = new Twit(config);
 
 // Settig up a user stream
-var stream = T.stream('user');
+let stream = T.stream('user');
 
 // Anytime Someone follows me
 stream.on('follow', followed);
@@ -15,7 +15,7 @@ stream.on('tweet', filterAreaTweets);
 
 // find people talking about coding in our area
 function filterAreaTweets(tweetedUser) {
-  var buzwords = [
+  const buzwords = [
     'learn to code',
     'programming',
     'web development',
@@ -30,13 +30,13 @@ function filterAreaTweets(tweetedUser) {
     '100DaysOfCode'
   ];
   //Append Hashtags to buzzwords array of strings
-  var hashtags = buzwords.map(words => '#' + words.replace(/\s/gi, ''));
+  let hashtags = buzwords.map(words => '#' + words.replace(/\s/gi, ''));
   buzwords.push(hashtags);
 
   //Search bounding box from merced to Sacramento and bay area
   const centralValley = ['-122.0042', '37.2724', '-119.9999', '39.0659'];
 
-  var stream = T.stream('statuses/filter', {
+  let stream = T.stream('statuses/filter', {
     //find a match to words in buzwords array
     track: buzwords,
 
@@ -66,8 +66,8 @@ function filterAreaTweets(tweetedUser) {
 
 function followed(eventMsg) {
   console.log('Follow event!');
-  var name = eventMsg.source.name;
-  var screenName = eventMsg.source.screen_name;
+  let name = eventMsg.source.name;
+  let screenName = eventMsg.source.screen_name;
 
   // the post request for direct messages > need to add a function to handle errors
   setTimeout(function() {
